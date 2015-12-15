@@ -27,7 +27,7 @@
     "php": ">=5.4",
     "composer/installers": "~1.0",
     "intervention/image": "^2.3",
-    "asgardcms/core-module": "~1.0"
+    "asgardcms/core-module": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0",
@@ -38,6 +38,10 @@
     {
       "type": "vcs",
       "url": "https://github.com/nWidart/modules"
+    },
+    {
+        "type": "vcs",
+        "url": "git@github.com:bitsoflove/Core.git"
     }
   ],
   "autoload-dev": {
