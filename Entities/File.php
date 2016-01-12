@@ -35,6 +35,7 @@ class File extends Model
         'height',
         'filesize',
         'folder_id',
+        'site_id'
     ];
     protected $appends = ['path_string'];
 
