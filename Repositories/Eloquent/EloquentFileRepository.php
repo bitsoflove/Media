@@ -6,6 +6,7 @@ use Modules\Media\Entities\File;
 use Modules\Media\Helpers\FileHelper;
 use Modules\Media\Repositories\FileRepository;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use \Site;
 
 class EloquentFileRepository extends EloquentBaseRepository implements FileRepository
 {
@@ -37,14 +38,21 @@ class EloquentFileRepository extends EloquentBaseRepository implements FileRepos
             $fileName = $this->getNewUniqueFilename($fileName);
         }
 
-        return $this->model->create([
+        $data = [
             'filename' => $fileName,
             'path' => config('asgard.media.config.files-path') . "{$fileName}",
             'extension' => substr(strrchr($fileName, "."), 1),
             'mimetype' => $file->getClientMimeType(),
             'filesize' => $file->getFileInfo()->getSize(),
             'folder_id' => 0,
-        ]);
+        ];
+
+        if(is_module_enabled('Site')) {
+            $siteId = Site::id();
+            $data['site_id'] = $siteId;
+        }
+
+        return $this->model->create($data);
     }
 
     public function destroy($file)
