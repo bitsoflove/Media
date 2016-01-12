@@ -50,6 +50,7 @@ class EloquentFileRepository extends EloquentBaseRepository implements FileRepos
         if(is_module_enabled('Site')) {
             $siteId = Site::id();
             $data['site_id'] = $siteId;
+            $data['path'] = config('asgard.media.config.files-path') . '/' . Site::current()->slug ."/{$fileName}";
         }
 
         return $this->model->create($data);
