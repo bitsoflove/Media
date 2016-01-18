@@ -3,6 +3,7 @@
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Media\ValueObjects\MediaPath;
+use Modules\Media\Traits\MultiSiteTenancyTrait;
 
 /**
  * Class File
@@ -12,6 +13,8 @@ use Modules\Media\ValueObjects\MediaPath;
 class File extends Model
 {
     use Translatable;
+    use MultiSiteTenancyTrait;
+
     /**
      * All the different images types where thumbnails should be created
      * @var array
@@ -32,6 +35,7 @@ class File extends Model
         'height',
         'filesize',
         'folder_id',
+        'site_id'
     ];
     protected $appends = ['path_string'];
 
