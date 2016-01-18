@@ -6,6 +6,7 @@ use Illuminate\Contracts\Filesystem\Factory;
 use Intervention\Image\ImageManager;
 use Modules\Media\Entities\File;
 use Modules\Media\ValueObjects\MediaPath;
+use Modules\Site\Facades\Site;
 
 class Imagy
 {
@@ -84,7 +85,12 @@ class Imagy
             return $originalImage;
         }
 
-        $path = config('asgard.media.config.files-path') . $this->newFilename($originalImage, $thumbnail);
+        if(is_module_enabled('Site')) {
+            $path = config('asgard.media.config.files-path') . Site::current()->slug . '/' . $this->newFilename($originalImage, $thumbnail);
+        } else {
+            $path = config('asgard.media.config.files-path') . $this->newFilename($originalImage, $thumbnail);
+        }
+
 
         return (new MediaPath($path))->getUrl();
     }
