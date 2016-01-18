@@ -107,7 +107,13 @@ class Imagy
 
         foreach ($this->manager->all() as $thumbnail) {
             $image = $this->image->make($this->filesystem->disk($this->getConfiguredFilesystem())->get($this->getDestinationPath($path->getRelativeUrl())));
-            $filename = config('asgard.media.config.files-path') . $this->newFilename($path, $thumbnail->name());
+            if(is_module_enabled('Site')) {
+                $filename = config('asgard.media.config.files-path') . Site::current()->slug . '/' . $this->newFilename($path, $thumbnail->name());
+            } else {
+                $filename = config('asgard.media.config.files-path') . $this->newFilename($path, $thumbnail->name());
+            }
+
+
             foreach ($thumbnail->filters() as $manipulation => $options) {
                 $image = $this->imageFactory->make($manipulation)->handle($image, $options);
             }
