@@ -1,5 +1,5 @@
 {
-  "name": "asgardcms/media-module",
+  "name": "bitsoflove-asgard/media",
   "type": "asgard-module",
   "description": "Media module for AsgardCMS. Handles the media library.",
   "keywords": [
@@ -27,7 +27,7 @@
     "php": ">=5.4",
     "composer/installers": "~1.0",
     "intervention/image": "^2.3",
-    "asgardcms/core-module": "dev-master"
+    "bitsoflove-asgard/core": "~1.22.0.1"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0",
